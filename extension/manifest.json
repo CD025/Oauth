@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "Google Drive Manager",
+  "version": "1.0",
+  "description": "Manage your Google Drive files efficiently.",
+  "permissions": [
+    "identity",
+    "identity.email",
+    "storage",
+    "scripting",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "activeTab",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "host_permissions": [
+    "https://www.googleapis.com/*",
+    "https://accounts.google.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://drive.google.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  }
+}
