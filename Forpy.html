@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OAuth Security Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        h1 { color: red; }
+        table { width: 80%; margin: auto; border-collapse: collapse; }
+        th, td { padding: 10px; border: 1px solid black; }
+    </style>
+</head>
+<body>
+    <h1>OAuth Security Monitoring Dashboard</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Security Event</th>
+            </tr>
+        </thead>
+        <tbody id="log-table">
+            <tr><td colspan="2">Loading logs...</td></tr>
+        </tbody>
+    </table>
+
+    <script>
+        async function fetchLogs() {
+            let response = await fetch("/logs");
+            let logs = await response.json();
+            let table = document.getElementById("log-table");
+            table.innerHTML = "";
+
+            logs.forEach(log => {
+                let row = `<tr><td>${new Date().toLocaleTimeString()}</td><td>${log}</td></tr>`;
+                table.innerHTML += row;
+            });
+        }
+
+        setInterval(fetchLogs, 3000); // Refresh logs every 3 seconds
+    </script>
+</body>
+</html>
