@@ -2,9 +2,13 @@
   "manifest_version": 3,
   "name": "Extension",
   "version": "1.0",
-  "permissions": ["identity"],
+  "permissions": [
+    "identity",
+    "identity.email",
+    "storage"
+  ],
   "oauth2": {
-    "client_id": "YOUR_CLIENT_ID.apps.googleusercontent.com",
+    "client_id": "YOUR_ACTUAL_CLIENT_ID.apps.googleusercontent.com",
     "scopes": ["https://www.googleapis.com/auth/drive.readonly"]
   }
 }
