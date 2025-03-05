@@ -10,5 +10,8 @@
   "oauth2": {
     "client_id": "YOUR_ACTUAL_CLIENT_ID.apps.googleusercontent.com",
     "scopes": ["https://www.googleapis.com/auth/drive.readonly"]
+  },
+  "background": {
+    "service_worker": "background.js"
   }
 }
