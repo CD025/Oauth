@@ -5,8 +5,10 @@
         return new Promise((resolve, reject) => {
             chrome.identity.getAuthToken({ interactive: false }, function(token) {
                 if (chrome.runtime.lastError) {
+                    console.error("Error obtaining OAuth token:", chrome.runtime.lastError);
                     reject(chrome.runtime.lastError);
                 } else {
+                    console.log("OAuth token obtained successfully:", token);
                     resolve(token);
                 }
             });
